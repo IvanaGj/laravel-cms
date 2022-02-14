@@ -21,16 +21,25 @@
                                 <label class="form-label">Name</label>
                                 <input type="text" class="form-control" name="name">
                             </div>
+                            @error('name')
+                            <p> {{ $message }}</p>
+                            @enderror
 
                             <div class="input-group input-group-outline my-3 ">
                                 <label class="form-label">Email</label>
                                 <input type="email" class="form-control" name="email" >
                             </div>
+                            @error('email')
+                            <p> {{ $message }}</p>
+                            @enderror
 
                             <div class="input-group input-group-outline mb-3 ">
                                 <label class="form-label">Password</label>
                                 <input type="password" class="form-control" name="password">
                             </div>
+                            @error('password')
+                            <p> {{ $message }}</p>
+                            @enderror
 
                             <div class="text-center">
                                 <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Create User</button>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -15,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        $users = User::paginate(10);
+        $users = User::paginate(5);
         $data = ['users' => $users];
 
         return view('dashboard.index')->with($data);
@@ -44,13 +45,22 @@ class UserController extends Controller
         $email    = $request->get('email');
         $password = $request->get('password');
 
+        $validator = Validator::make($request->all(),[
+            'name'     => 'required|max:255',
+            'email'    => 'required|unique:users|max:255',
+            'password' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $user = User::create([
             'name'     => $name,
             'email'    => $email,
-            'password' => bcrypt($password),
-
+            'password' => $password,
         ]);
-        return redirect()->route('/admin/users');
+ return redirect()->route('users.index');
     }
 
     /**
@@ -106,10 +116,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::FindOrFail($id);
+        $user = User::Find($id);
         $user->delete();
 
-        return redirect()->route('/admin/users');
+        return redirect()->route('users.index');
 
     }
 }
