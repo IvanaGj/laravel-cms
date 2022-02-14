@@ -6,6 +6,7 @@
         <thead>
         <tr style="color: #0d376f ">
             <th>ID</th>
+            <th>Image</th>
             <th>Name</th>
             <th>Email</th>
             <th>Created_At</th>
@@ -17,6 +18,7 @@
 @foreach($users as $user)
     <tr>
         <td><a href="/admin/users/{{ $user->id }}"> {{ $user->id }} </td>
+        <td><img width="50" height="50" src="/assets/img/users/thumbnails/{{ $user->image }}"></td>
         <td> {{ $user->name }} </td>
         <td> {{ $user->email }} </td>
         <td> {{ $user->created_at->diffForHumans() }} </td>

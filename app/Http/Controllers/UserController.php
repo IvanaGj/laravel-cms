@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Helper\ImageStore;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -41,26 +43,34 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $name     = $request->get('name');
-        $email    = $request->get('email');
-        $password = $request->get('password');
+
+
 
         $validator = Validator::make($request->all(),[
             'name'     => 'required|max:255',
             'email'    => 'required|unique:users|max:255',
             'password' => 'required',
+            'image' => 'required',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $user = User::create([
-            'name'     => $name,
-            'email'    => $email,
-            'password' => $password,
+
+        $imageObj = new ImageStore($request, 'users');
+        $image = $imageObj->imageStore();
+
+        $password = $request->get('password');
+
+        User::create([
+            'name'     => $request->get('name'),
+            'email'    => $request->get('email'),
+            'password' => Hash::make($password),
+            'image' => $image,
         ]);
- return redirect()->route('users.index');
+
+        return redirect()->route('users.index');
     }
 
     /**

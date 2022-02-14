@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white " href="/users">
+                <a class="nav-link text-white " href="/admin/users">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
@@ -198,12 +198,17 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a href="/logout.php" class="nav-link text-body p-0">
-                            <i class="fa fa-power-off cursor-pointer"></i>
+
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
                         </a>
 
-                    </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+
                 </ul>
             </div>
         </div>

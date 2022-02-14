@@ -14,7 +14,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form role="form" class="text-start" method="post" action="/admin/users">
+                        <form role="form" class="text-start" method="post" enctype="multipart/form-data" action="/admin/users">
                             @csrf
 
                             <div class="input-group input-group-outline my-3 ">
@@ -22,6 +22,14 @@
                                 <input type="text" class="form-control" name="name">
                             </div>
                             @error('name')
+                            <p> {{ $message }}</p>
+                            @enderror
+
+                            <div class="input-group input-group-outline my-3 ">
+                                <label class="form-label">Image</label>
+                                <input type="file" class="form-control" name="image">
+                            </div>
+                            @error('image')
                             <p> {{ $message }}</p>
                             @enderror
 
