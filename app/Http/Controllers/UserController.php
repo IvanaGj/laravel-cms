@@ -21,7 +21,7 @@ class UserController extends Controller
         $users = User::paginate(5);
         $data = ['users' => $users];
 
-        return view('dashboard.index')->with($data);
+        return view('dashboard.users.index')->with($data);
 
     }
 
@@ -32,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('dashboard.create');
+        return view('dashboard.users.create');
     }
 
     /**
@@ -43,9 +43,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
-
-
         $validator = Validator::make($request->all(),[
             'name'     => 'required|max:255',
             'email'    => 'required|unique:users|max:255',
@@ -84,7 +81,7 @@ class UserController extends Controller
         $user = User::FindOrFail($id);
         $data = ['user' => $user];
 
-        return view('dashboard.show')->with($data);
+        return view('dashboard.users.show')->with($data);
 
     }
 
@@ -99,7 +96,7 @@ class UserController extends Controller
         $user = User::FindOrFail($id);
         $data = ['user' => $user];
 
-       return view('dashboard.edit')->with($data);
+       return view('dashboard.users.edit')->with($data);
     }
 
     /**

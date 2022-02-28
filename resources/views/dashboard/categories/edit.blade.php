@@ -33,7 +33,7 @@
                 <div class="text-center">
                     <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Add</button>
                 </div>
-
+                <a href="/admin/categories" class="btn btn-outline-primary ">Back</a>
             </form>
         </div>
     </div>

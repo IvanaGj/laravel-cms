@@ -14,18 +14,20 @@ class ImageStore
     public $request;
     public $path;
     public $paths;
+    public $name;
 
-    public function __construct(Request $request, $path)
+    public function __construct(Request $request, $path, $name = 'image')
     {
         $this->request = $request;
         $this->path = $path;
+        $this->name = $name;
     }
 
 
     public function imageStore()
     {
-        if ($this->request->hasFile('image')) {
-            $image = $this->request->file('image');
+        if ($this->request->hasFile($this->name)) {
+            $image = $this->request->file($this->name);
 
             $imageName = Str::random(10) . '.' . $image->getClientOriginalExtension();
             $paths = $this->makePaths();

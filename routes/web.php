@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,26 +26,22 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
 
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/chat', [App\Http\Controllers\HomeController::class, 'chat'])->name('chat');
-    Route::post('/chat/send-event', [App\Http\Controllers\HomeController::class, 'sendEvent'])->name('chat');
 
     Route::post('/create-status',  [App\Http\Controllers\HomeController::class, 'createStatus'])->name('create.status');
-
     Route::post('/status/{status}/like',  [App\Http\Controllers\HomeController::class, 'likeStatus'])->name('like.status');
     Route::post('/status/{status}/unlike',  [App\Http\Controllers\HomeController::class, 'unlike'])->name('unlike.status');
 
 
-    Route::get('/products/job', [App\Http\Controllers\ProductsController::class, 'trigerJob'])->name('products.job');
-
     Route::resource('/users', App\Http\Controllers\UserController::class);
-    Route::get('/users/{user}/products', [App\Http\Controllers\UserController::class, 'getProducts'])->name('user.products');
-
-    Route::resource('/products', App\Http\Controllers\ProductsController::class);
-
+    Route::get('/users/{user}/delete', [App\Http\Controllers\UserController::class, 'destroy']);
     Route::resource('/categories', App\Http\Controllers\CategoriesController::class);
     Route::get('/categories/{id}/delete', [App\Http\Controllers\CategoriesController::class, 'destroy'])->name('categories.delete');
 
 
-
+    Route::get('/settings/', [App\Http\Controllers\SettingsController::class, 'index'])->name('settings.index');
+    Route::get('/settings/create', [App\Http\Controllers\SettingsController::class, 'create'])->name('settings.create');
+    Route::post('/settings/', [App\Http\Controllers\SettingsController::class, 'store'])->name('settings.store');
+    Route::get('/settings/edit/{id}', [App\Http\Controllers\SettingsController::class, 'edit'])->name('settings.edit');
+    Route::put('/settings/edit/{id}', [App\Http\Controllers\SettingsController::class, 'update'])->name('settings.update');
 });
 
