@@ -43,5 +43,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin'], function() {
     Route::post('/settings/', [App\Http\Controllers\SettingsController::class, 'store'])->name('settings.store');
     Route::get('/settings/edit/{id}', [App\Http\Controllers\SettingsController::class, 'edit'])->name('settings.edit');
     Route::put('/settings/edit/{id}', [App\Http\Controllers\SettingsController::class, 'update'])->name('settings.update');
+
+
+    Route::get('/products/', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [App\Http\Controllers\ProductsController::class, 'create'])->name('products.create');
+    Route::post('/products/', [App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
+    Route::get('/products/{id}/edit', [App\Http\Controllers\ProductsController::class, 'edit'])->name('products.edit');
+
+
 });
 

@@ -75,10 +75,10 @@
                     </p>
                 </div>
             </div>
-            <!-- END INPUT SIZING -->
+
         </div>
         <div class="col-md-6">
-            <!-- LABELS -->
+
             <div class="card" style="margin-top: 20px !important;">
                 <div class="card-header bg-white text-center py-3">
                     <h3 class="panel-title">Phone</h3>
